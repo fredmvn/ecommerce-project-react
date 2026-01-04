@@ -17,6 +17,10 @@ import "./App.css";
 
 // 6d. Save the changes from the previous exercises into git. For the rest of the exercises, save changes into git after each exercise.
 
+/* 6e. Rename header.css to Header.css so it matches the component's name. Check the git section to see if git detected the change.
+  - If git detected the change, save the change into git (using Commit).
+  - If git did not detect the change, this happens because on some operating systems (Windows and Mac), git is case-insensitive. That means header.css and Header.css are considered the same.
+  - To fix this, rename header.css to something like header2.css. Save these changes into git (using Commit). Then, rename header2.css to Header.css and git will now detect the change. */
 function App() {
   return (
     <Routes>
