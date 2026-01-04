@@ -21,6 +21,12 @@ import "./App.css";
   - If git detected the change, save the change into git (using Commit).
   - If git did not detect the change, this happens because on some operating systems (Windows and Mac), git is case-insensitive. That means header.css and Header.css are considered the same.
   - To fix this, rename header.css to something like header2.css. Save these changes into git (using Commit). Then, rename header2.css to Header.css and git will now detect the change. */
+
+/* 6f. React Router has another component called <NavLink> that is useful for navigation links (links at the top of a page, usually in a header).
+  - For an example, check apple.com and see the links at the top.
+  - In Header.jsx, update all <Link>s to <NavLink>s (props are the same).
+  - The special feature of <NavLink> is it knows which page is loaded. For example, if you're on the Orders page, it adds a class called active to the Orders link (className="orders-link active").
+  - Inside Header.css, style the orders link so when it's active, "Orders" is underlined (Hint: .orders-link.active will style an element with the class orders-link and active. Use text-decoration: underline;)*/
 function App() {
   return (
     <Routes>
