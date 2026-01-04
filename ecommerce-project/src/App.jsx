@@ -3,6 +3,7 @@ import { HomePage } from "./pages/HomePage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/OrdersPage";
 import { TrackingPage } from "./pages/TrackingPage";
+import { ErrorPage } from "./pages/ErrorPage";
 import "./App.css";
 
 /* 6a. In the checkout page, split up the header into a separate component called CheckoutHeader.
@@ -43,6 +44,9 @@ import "./App.css";
 /* 6j. Create a folder src/assets/images. Open public/images, move the 4 logos at the bottom and the icons folder to src/assets/images (we usually save logos and icons in src/assets/images, but not favicons).
   - Using the Search section of VSCode, find where each logo and icon is used in the code, import the image, and insert it using src={...} instead of using a string for the src attribute.
   - (We don't do this for product images or ratings because each product can have a different image and rating. This makes importing difficult).*/
+
+/* 6k. We'll add a 404 (Not Found) page. Create a page that displays the <Header> and message "Page not found" (style it however you want). 
+  - Create a <Route> with path="*" (this matches any URL path), set the element to your 404 page. Add this route to the bottom of <Routes> (if the URL does not match any other route, it will display your 404 page). */
 function App() {
   return (
     <Routes>
@@ -50,6 +54,7 @@ function App() {
       <Route path="checkout" element={<CheckoutPage />} />
       <Route path="orders" element={<OrdersPage />} />
       <Route path="tracking" element={<TrackingPage />} />
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }
