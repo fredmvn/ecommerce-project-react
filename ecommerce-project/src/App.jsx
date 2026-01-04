@@ -27,6 +27,15 @@ import "./App.css";
   - In Header.jsx, update all <Link>s to <NavLink>s (props are the same).
   - The special feature of <NavLink> is it knows which page is loaded. For example, if you're on the Orders page, it adds a class called active to the Orders link (className="orders-link active").
   - Inside Header.css, style the orders link so when it's active, "Orders" is underlined (Hint: .orders-link.active will style an element with the class orders-link and active. Use text-decoration: underline;)*/
+
+/* 6g. We'll use React to change the icon in the tabs (this is called a favicon)
+  - In index.html, look for <link rel="icon" href="...">. This sets the favicon. Copy this into HomePage, CheckoutPage, and OrdersPage.
+  - In your browser, open supersimple.dev/images/home-favicon.png and download the image into the public folder. Do the same for supersimple.dev/images/cart-favicon.png and supersimple.dev/images/orders-favicon.png.
+  - In HomePage set the href of the favicon to home-favicon.png (if we set href to a file name, Vite will look for the file in the public folder).
+  - Update CheckoutPage to use cart-favicon.png and OrdersPage to use orders-favicon.png
+  - In index.html, remove <link rel="icon" href="...">
+  - Open the website and switch pages. Notice the favicon changes.*/
+
 function App() {
   return (
     <Routes>
