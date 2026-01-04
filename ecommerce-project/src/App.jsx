@@ -36,6 +36,8 @@ import "./App.css";
   - In index.html, remove <link rel="icon" href="...">
   - Open the website and switch pages. Notice the favicon changes.*/
 
+// 6h. Move the tracking page to React and add its favicon
+
 function App() {
   return (
     <Routes>
