@@ -4,7 +4,7 @@ import { Header } from "../components/Header";
 export function HomePage() {
   return (
     <>
-      <title>Eccomerce Project</title>
+      <title>Ecommerce Project</title>
       <Header />
 
       <div className="home-page">
