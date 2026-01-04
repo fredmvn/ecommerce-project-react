@@ -38,6 +38,8 @@ import "./App.css";
 
 // 6h. Move the tracking page to React and add its favicon
 
+// 6i. Using the Search section of VSCode (Ctrl + Shift + F on Windows or Command + Shift + F on Mac), find any other <a> elements in the code and replace them with the <Link> component.
+
 function App() {
   return (
     <Routes>
