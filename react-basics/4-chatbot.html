@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatbot</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0;
+    }
+    .send-button {
+      background-color: #198754;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      color: white;
+      margin-left: 10px;
+    }
+    .send-button:hover {
+      cursor: pointer;
+    }
+    .chat-input {
+      padding: 12px 15px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid black;
+      outline: none;
+      flex: 1;
+    }
+    .chat-input-container {
+      display: flex;
+      margin-bottom: 50px;
+    }
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      max-width: 600px;
+      margin: auto;
+      height: 100dvh;
+    }
+    .chat-message-text:has(.loading-gif) {
+      padding: 0;
+    }
+    .chat-message-user {
+      display: flex;
+      justify-content: end;
+      align-items: start;
+    }
+    .chat-message-text {
+      background-color: rgb(238, 238, 238);
+      align-self: center;
+      padding: 15px 20px;
+      border-radius: 10px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-bottom: 20px;
+      max-width: 300px;
+    }
+    .chat-message-robot {
+      display: flex;
+      align-items: start;
+    }
+    .loading-gif {
+      padding: 5px 10px;
+      width: 35px;
+      height: 35px;
+    }
+    .chat-message-profile {
+      width: 45px;
+    }
+    .chat-messages-container {
+      flex-grow: 1;
+      margin-top: 20px;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .welcome-message {
+      color: #444;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      // In React, the component name MUST start with a capital letter -> Pascal Case
+
+      // Fragment syntax: <></>, let us group HTML Elements without using a div as wrapper, resulting in a cleaner way to group elements
+
+      // 4j. Remove the default chat messages at the start of the app. If there are no chat messages (check chatMessages.length === 0), display a welcome message (to center it, use text-align: center). E.G: Welcome to the chatbot project! Send a message using the textbox below.
+
+      // 4k. Add a loading spinner when the Chatbot is loading a response.
+
+      /* 41. In addition to built-in hooks like useState and useEffect, we can also create our own, custom hooks. We'll make the auto-scroll feature a custom hook, so we can easily add this feature to other components.
+        - Create a function useAutoScroll (hook functions must start with use)
+        - Inside a custom hook, we just use a combination of other hooks. For example, cut and paste the useRef() and useEffect() hooks from the ChatMessages component into useAutoScroll.
+        - At the top, add a parameter, dependencies, and use this value as the dependency array of useEffect (since the dependency array will be provided from outside the hook).
+        - At the end, return the ref (since the ref will be used outside the hook).
+        - In the ChatMessages component, at the top, use useAutoScroll(). Provide it with the dependency array, and use the ref that it returns. */
+
+      function useAutoScroll(dependencies) {
+        const chatMessagesRef = React.useRef(null);
+
+        React.useEffect(() => {
+          const containerElem = chatMessagesRef.current;
+          if (containerElem) {
+            containerElem.scrollTop = containerElem.scrollHeight;
+          }
+        }, [dependencies]);
+
+        return chatMessagesRef;
+      }
+
+      function ChatInput({ chatMessages, setChatMessages }) {
+        const [inputText, setInputText] = React.useState("");
+        const [isLoading, setIsLoading] = React.useState(false);
+
+        function saveInputText(event) {
+          setInputText(event.target.value);
+        }
+
+        async function sendMessage() {
+          if (inputText === "" || isLoading) return;
+
+          const newChatMessages = [
+            ...chatMessages,
+            { message: inputText, sender: "user", id: crypto.randomUUID() },
+          ];
+
+          setChatMessages(newChatMessages);
+
+          clearText();
+
+          setChatMessages([
+            ...newChatMessages,
+            {
+              message: "",
+              sender: "robot",
+              id: crypto.randomUUID(),
+              loading: true,
+            },
+          ]);
+
+          setIsLoading(true);
+          const response = await Chatbot.getResponseAsync(inputText);
+          setIsLoading(false);
+
+          setChatMessages([
+            ...newChatMessages,
+            { message: response, sender: "robot", id: crypto.randomUUID() },
+          ]);
+        }
+
+        function clearText() {
+          setInputText("");
+        }
+
+        function handleKeyDown(e) {
+          const { key } = e;
+          if (key === "Enter") sendMessage();
+          if (key === "Escape") clearText();
+        }
+
+        return (
+          <div className="chat-input-container">
+            <input
+              placeholder="Send a message to Chatbot"
+              size="30"
+              onChange={saveInputText}
+              onKeyDown={handleKeyDown}
+              value={inputText}
+              className="chat-input"
+            />
+            <button onClick={sendMessage} className="send-button">
+              Send
+            </button>
+          </div>
+        );
+      }
+
+      function ChatMessage({ sender, message, loading }) {
+        return (
+          <div
+            className={
+              sender === "user" ? "chat-message-user" : "chat-message-robot"
+            }
+          >
+            {sender === "robot" && (
+              <img
+                src="assets/images/robot.png"
+                className="chat-message-profile"
+              />
+            )}
+            <div className="chat-message-text">
+              {message}
+              {loading && (
+                <img
+                  src="assets/images/loading-spinner.gif"
+                  className="loading-gif"
+                />
+              )}
+            </div>
+            {sender === "user" && (
+              <img
+                src="assets/images/user.png"
+                className="chat-message-profile"
+              />
+            )}
+          </div>
+        );
+      }
+
+      function ChatMessages({ chatMessages }) {
+        const chatMessagesRef = useAutoScroll(chatMessages);
+        return (
+          <div className="chat-messages-container" ref={chatMessagesRef}>
+            {chatMessages.length === 0 && (
+              <p className="welcome-message">
+                Welcome to the chatbot project! Send a message using the textbox
+                below.
+              </p>
+            )}
+            {chatMessages.map(({ message, sender, id, loading }) => (
+              <ChatMessage
+                message={message}
+                sender={sender}
+                key={id}
+                loading={loading}
+              />
+            ))}
+          </div>
+        );
+      }
+
+      function App() {
+        const [chatMessages, setChatMessages] = React.useState([]);
+
+        return (
+          <div className="app-container">
+            <ChatMessages chatMessages={chatMessages} />
+            <ChatInput
+              chatMessages={chatMessages}
+              setChatMessages={setChatMessages}
+            />
+          </div>
+        );
+      }
+
+      // Instead of putting {ChatInput()}, we can use the component syntax, which let us insert our component as an HTML Element: <ChatInput></ChatInput> or, if it is not going to have child elements (self-closing syntax): <ChatInput />
+
+      const container = document.querySelector(".js-container");
+      const root = ReactDOM.createRoot(container);
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>

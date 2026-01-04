@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chatbot</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      // In React, the component name MUST start with a capital letter -> Pascal Case
+
+      // Fragment syntax: <></>, let us group HTML Elements without using a div as wrapper, resulting in a cleaner way to group elements
+
+      /* 3i. Instead of clicking the "Send" button, we can also send a message by pressing "Enter" on our keyboard. We'll add this feature to the project.
+      - Add a new event prop onKeyDown to the <input>. This runs a function each time we press a key on our keyboard.
+      - The function gets an event parameter, and we can get the key that was pressed using event.key
+      - If event.key is 'Enter', send the message. */
+
+      // ... 3j. If we type in the <input> and press "Esc" (or "Escape") it should remove the text in the <input>. Hint: check if event.key is "Escape"
+
+      /* ... 3k. In the real world, the Chatbot does not respond immediately, it takes some time to think, and then respond (see the final Chatbot project).
+      We'll learn how to handle this situation.
+        - Change Chatbot.getResponse to Chatbot.getResponseAsync (for this function, the Chatbot thinks for a second, and then responds).
+        - Chatbot.getResponseAsync returns a promise (promise = a value that is not available yet, but will be available in the future).
+        - Add await in front of Chatbot.getResponseAsync to wait for it to finish (wait for the value to be available before continuing).
+        - Add async in front of function sendMessage() (because we can only use await inside an async function).
+        - As a review, this is a JavaScript feature called async / await
+      */
+      /* ... 3l. Now that we wait for the Chatbot's response, let's improve the app: 
+        - Update the code so it removes the text in the textbox right after sending our message (otherwise, the text will stay in the textbox for a while, until the response is ready, which doesn't look good).
+        - While waiting for the Chatbot's response, display a "Loading..." message and remove it after (see final Chatbot project). */
+      /* ... 3m. Add an isLoading state to <ChatInput> that represents if it's loading (waiting for a response from the chatbot).
+        - If it is loading, don't allow sending a new message.
+        - Also, don't allow sending a new message if inputText is empty. */
+      function ChatInput({ chatMessages, setChatMessages }) {
+        const [inputText, setInputText] = React.useState("");
+        const [isLoading, setIsLoading] = React.useState(false);
+
+        function saveInputText(event) {
+          setInputText(event.target.value);
+        }
+
+        async function sendMessage() {
+          if (inputText === "" || isLoading) return;
+
+          const newChatMessages = [
+            ...chatMessages,
+            { message: inputText, sender: "user", id: crypto.randomUUID() },
+          ];
+
+          setChatMessages(newChatMessages);
+
+          clearText();
+
+          setChatMessages([
+            ...newChatMessages,
+            { message: "Loading...", sender: "robot", id: crypto.randomUUID() },
+          ]);
+
+          setIsLoading(true);
+          const response = await Chatbot.getResponseAsync(inputText);
+          setIsLoading(false);
+
+          setChatMessages([
+            ...newChatMessages,
+            { message: response, sender: "robot", id: crypto.randomUUID() },
+          ]);
+        }
+
+        function clearText() {
+          setInputText("");
+        }
+
+        function handleKeyDown(e) {
+          const { key } = e;
+          if (key === "Enter") sendMessage();
+          if (key === "Escape") clearText();
+        }
+
+        return (
+          <>
+            <input
+              placeholder="Send a message to Chatbot"
+              size="30"
+              onChange={saveInputText}
+              onKeyDown={handleKeyDown}
+              value={inputText}
+            />
+            <button onClick={sendMessage}>Send</button>
+          </>
+        );
+      }
+
+      function ChatMessage({ sender, message }) {
+        return (
+          <div>
+            {sender === "robot" && (
+              <img src="assets/images/robot.png" width="50" />
+            )}
+            {message}
+            {sender === "user" && (
+              <img src="assets/images/user.png" width="50" />
+            )}
+          </div>
+        );
+      }
+
+      function ChatMessages({ chatMessages }) {
+        return (
+          <>
+            {chatMessages.map(({ message, sender, id }) => (
+              <ChatMessage message={message} sender={sender} key={id} />
+            ))}
+          </>
+        );
+      }
+
+      function App() {
+        const [chatMessages, setChatMessages] = React.useState([
+          {
+            message: "hello chatbot",
+            sender: "user",
+            id: crypto.randomUUID(),
+          },
+          {
+            message: "Hello! How can I help you?",
+            sender: "robot",
+            id: crypto.randomUUID(),
+          },
+          {
+            message: "can you get me todays date?",
+            sender: "user",
+            id: crypto.randomUUID(),
+          },
+          {
+            message: "Today is January 1",
+            sender: "robot",
+            id: crypto.randomUUID(),
+          },
+        ]);
+
+        return (
+          <>
+            <ChatInput
+              chatMessages={chatMessages}
+              setChatMessages={setChatMessages}
+            />
+            <ChatMessages chatMessages={chatMessages} />
+          </>
+        );
+      }
+
+      // Instead of putting {ChatInput()}, we can use the component syntax, which let us insert our component as an HTML Element: <ChatInput></ChatInput> or, if it is not going to have child elements (self-closing syntax): <ChatInput />
+
+      const container = document.querySelector(".js-container");
+      const root = ReactDOM.createRoot(container);
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>

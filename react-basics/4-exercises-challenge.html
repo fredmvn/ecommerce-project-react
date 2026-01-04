@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lesson 4</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial;
+      margin: 0 10px;
+    }
+    .form-button {
+      background-color: rgb(0, 123, 255);
+      border: none;
+      padding: 8px 12px;
+      color: white;
+      border-radius: 5px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+    .form-input {
+      padding: 7px 10px;
+      border-radius: 5px;
+      outline: 1px solid;
+      border: none;
+      margin-bottom: 10px;
+    }
+    .form-input:focus {
+      outline-width: 2px;
+      outline-color: rgb(0, 123, 255);
+    }
+    .show-button {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    .counter-button {
+      background-color: rgb(25, 135, 84);
+      margin-left: 10px;
+      padding: 10px;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    .counter-container {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      background-color: rgb(222, 222, 222);
+    }
+  </style>
+  <body>
+    <div class="js-container"></div>
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      const container = document.querySelector(".js-container");
+      const root = ReactDOM.createRoot(container);
+      // 4d. Start from a new React website and create the design on the right. (Hint: we already created the HTML elements for this design in exercise 2d. You can copy the code from 2d or you can start from nothing to challenge yourself). Background color: rgb(0,123,255)
+
+      // 4e. Add a button beside the password to show / hide the password. (Using State, save a boolean showPassword that switches between true and false when clicking the button. To show / hide the password, switch the password <input>'s type prop between 'password' and 'text').
+
+      /* 4f. We'll create the clock from lesson 1 exercises using hooks:
+      - First, load the DayJS external library:
+      https://unpkg.com/supersimpledev/dayjs.js
+      - Using React.useState() save a string time. To get the current time as a string, you can use dayjs().format('HH:mm:ss')
+      - Using React.useEffect() run this code once after the component is created: setInterval(() => { }, 1000) (this code runs a function every 1000 milliseconds or 1 second).
+      - In the function that we give to setInterval, get the time again using dayjs().format('HH:mm:ss') and update the State.
+      */
+
+      // 4g. Add console.log('run code'); inside setInterval and check how many times it runs. Then, remove the dependency array ([]) from React.useEffect() and check how many times it runs.
+
+      /* 4h. Create the counter app below (you can use the code for exercise 3c as a starting point or start from an empty React website).
+      - Note: do not put the counter in a separate component for now.
+      - Create a "Reset" button that resets the count to 0.
+      - Create an "Auto Click” button. When clicked, your code will click the counter every second (use setInterval). To click a button with code, first save the button element in your JavaScript (use useRef). Once you have the button element, run buttonElem.click().
+
+      (Normally, you can just update the count directly using State, instead of clicking the button with code. This is just to practice useRef)
+      */
+
+      /* 4i. Style the counter using this design:
+      - Background color: rgb(25,135,84)
+      - To center the buttons horizontally, put the buttons in a flexbox and use justify-content: center;
+      - To center the buttons vertically, first, make the flexbox the same height as the browser (use height: 100vh;)
+      - Add background-color: rgb(222, 222, 222); to the flexbox. Notice the default margin of 8px around the <body> element. Remove this default margin from the top and bottom.
+      - Now that the flexbox is the same height as the browser, center the elements vertically using align-items: center;
+      */
+      function LoginForm() {
+        const [showPassword, setShowPassword] = React.useState(false);
+
+        function togglePasswordView() {
+          setShowPassword(!showPassword);
+        }
+
+        return (
+          <>
+            <div>
+              <input className="form-input" type="email" placeholder="Email" />
+            </div>
+            <div>
+              <input
+                className="form-input"
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+              />
+              <button className="show-button" onClick={togglePasswordView}>
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+            <button className="form-button">Login</button>
+            <button className="form-button">Sign up</button>
+          </>
+        );
+      }
+
+      function Clock() {
+        const [time, setTime] = React.useState(dayjs().format("HH:mm:ss"));
+        React.useEffect(() => {
+          console.log("run code");
+          setInterval(() => {
+            const newTime = dayjs().format("HH:mm:ss");
+            setTime(newTime);
+          }, 1000);
+        }, []);
+        return <p>Current time: {time}</p>;
+      }
+
+      function Counter() {
+        const [count, setCount] = React.useState(0);
+        const counterRef = React.useRef(null);
+        const intervalRef = React.useRef(null);
+
+        function showClick() {
+          console.log("Clicked");
+        }
+
+        function handleCount() {
+          showClick();
+          setCount((count) => count + 1);
+        }
+
+        function resetCount() {
+          setCount(0);
+        }
+
+        function stopAutoClick() {
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+          }
+
+          intervalRef.current = null;
+        }
+
+        function handleAutoClick() {
+          if (intervalRef.current) {
+            stopAutoClick();
+            return;
+          }
+
+          intervalRef.current = setInterval(() => {
+            counterRef.current.click();
+          }, 500);
+        }
+
+        return (
+          <div className="counter-container">
+            <button
+              className="counter-button"
+              onClick={handleCount}
+              ref={counterRef}
+            >
+              Clicked {count} {count === 1 ? "time" : "times"}
+            </button>
+            <button className="counter-button" onClick={resetCount}>
+              Reset
+            </button>
+            <button className="counter-button" onClick={handleAutoClick}>
+              Auto Click
+            </button>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <div className="app-container">
+            <p>Hello, welcome to my website</p>
+            <LoginForm />
+            <Clock />
+            <Counter />
+          </div>
+        );
+      }
+
+      root.render(<App />);
+
+      // Next exercises will be in '4-chatbot.html' project
+    </script>
+  </body>
+</html>
