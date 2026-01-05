@@ -97,6 +97,13 @@ import "./App.css";
 
 // 7m. If the percent is >= 100, instead of "Arriving on" display "Delivered on".
 
+/* 7n. We'll highlight the correct label based on the delivery percent:
+  - Check if the delivery percent is < 33. Save it in a variable isPreparing
+  - Check if the percent is >= 33 and < 100. Save it in a variable isshipped
+  - Check if the percent is === 100. Save it in a variable isDelivered
+  - Scroll down to the progress-label elements. If an element has the class current-status that means it will be highlighted in green.
+  - For each progress-label, change className to a template string, and only add the class current-status if it is the current status. Example: `progress-label ${isPreparing && 'current-status'}`*/
+
 function App() {
   const [cart, setCart] = useState([]);
 
