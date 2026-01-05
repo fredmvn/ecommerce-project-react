@@ -95,6 +95,8 @@ import "./App.css";
   - Scroll down to the <div className="progress-bar"> and give it a prop style={{width: `${deliveryPercent}%` }}. Refresh, and check that the progress bar now reflects the delivery percent.
   - Temporarily update timePassedMs to totalDeliveryTimeMs * 0.3 and refresh. Check that the progress bar is updated. Change it back after.*/
 
+// 7m. If the percent is >= 100, instead of "Arriving on" display "Delivered on".
+
 function App() {
   const [cart, setCart] = useState([]);
 
