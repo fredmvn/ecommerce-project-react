@@ -49,6 +49,9 @@ import "./App.css";
 
 /* 6k. We'll add a 404 (Not Found) page. Create a page that displays the <Header> and message "Page not found" (style it however you want). 
   - Create a <Route> with path="*" (this matches any URL path), set the element to your 404 page. Add this route to the bottom of <Routes> (if the URL does not match any other route, it will display your 404 page). */
+
+// 7a. In OrdersPage.jsx, use async await to load the data instead of promise.
+
 function App() {
   const [cart, setCart] = useState([]);
 
