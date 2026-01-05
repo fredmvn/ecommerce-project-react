@@ -52,6 +52,11 @@ import "./App.css";
 
 // 7a. In OrdersPage.jsx, use async await to load the data instead of promise.
 
+/* 7b. In OrderSummary.jsx, separate the cart item details into a component:
+  - Create a new component named CartItemDetails.
+  - Move <img className="product-image"> and <div className="cart-item-details"> into this new component.
+  - Hint: you'll need to use a fragment <></> since you'll be returning multiple elements from the component.*/
+
 function App() {
   const [cart, setCart] = useState([]);
 
