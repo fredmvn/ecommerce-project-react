@@ -57,6 +57,9 @@ import "./App.css";
   - Move <img className="product-image"> and <div className="cart-item-details"> into this new component.
   - Hint: you'll need to use a fragment <></> since you'll be returning multiple elements from the component.*/
 
+/* 7c. In OrderSummary.jsx, separate the delivery-date into a component:
+  - Create a new component named DeliveryDate. Move the code that finds the selectedDeliveryOption into the component as well.*/
+
 function App() {
   const [cart, setCart] = useState([]);
 
