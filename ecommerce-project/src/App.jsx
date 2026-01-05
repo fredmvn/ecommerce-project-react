@@ -1,4 +1,6 @@
 import { Route, Routes } from "react-router";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { HomePage } from "./pages/HomePage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/OrdersPage";
@@ -48,10 +50,18 @@ import "./App.css";
 /* 6k. We'll add a 404 (Not Found) page. Create a page that displays the <Header> and message "Page not found" (style it however you want). 
   - Create a <Route> with path="*" (this matches any URL path), set the element to your 404 page. Add this route to the bottom of <Routes> (if the URL does not match any other route, it will display your 404 page). */
 function App() {
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/cart-items").then((response) => {
+      setCart(response.data);
+    });
+  }, []);
+
   return (
     <Routes>
-      <Route index element={<HomePage />} />
-      <Route path="checkout" element={<CheckoutPage />} />
+      <Route index element={<HomePage cart={cart} />} />
+      <Route path="checkout" element={<CheckoutPage cart={cart} />} />
       <Route path="orders" element={<OrdersPage />} />
       <Route path="tracking" element={<TrackingPage />} />
       <Route path="*" element={<ErrorPage />} />
