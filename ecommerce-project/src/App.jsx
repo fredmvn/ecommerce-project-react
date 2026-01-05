@@ -66,6 +66,8 @@ import "./App.css";
 
 // 7e. In OrdersPage.jsx, separate the <div className="orders-grid"> into its own component, named OrdersGrid.
 
+// 7f. In OrdersGrid, separate the <div className="order-header"> and <div className="order-details-grid"> into their own components.
+
 function App() {
   const [cart, setCart] = useState([]);
 
