@@ -104,6 +104,8 @@ import "./App.css";
   - Scroll down to the progress-label elements. If an element has the class current-status that means it will be highlighted in green.
   - For each progress-label, change className to a template string, and only add the class current-status if it is the current status. Example: `progress-label ${isPreparing && 'current-status'}`*/
 
+// 7o. In 6k, we added a 404 page. Pass the cart into the Header in this page.
+
 function App() {
   const [cart, setCart] = useState([]);
 
