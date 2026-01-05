@@ -1,15 +1,12 @@
 import { products } from "../../starting-code/ecommerce-project-main/data/products";
+import axios from "axios";
 import "./HomePage.css";
 import { Header } from "../components/Header";
 
 export function HomePage() {
-  fetch("http://localhost:3000/api/products")
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      console.log(data);
-    });
+  axios
+    .get("http://localhost:3000/api/products")
+    .then((r) => console.log(r, r.data));
 
   return (
     <>
