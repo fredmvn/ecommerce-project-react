@@ -68,6 +68,8 @@ import "./App.css";
 
 // 7f. In OrdersGrid, separate the <div className="order-header"> and <div className="order-details-grid"> into their own components.
 
+// 7g. In CheckoutPage, separate the header into a component (did this in lesson 6 exercises). Pass in the cart as a prop, display the total quantity.
+
 function App() {
   const [cart, setCart] = useState([]);
 
