@@ -74,6 +74,12 @@ import "./App.css";
 
 // 7i. Find the "Track package" button in the code. It links to "/tracking". Update this so it links to `/tracking/${orderId}/${productId}` (insert the order and product ids into the string). Click "Track package", and notice the order id and product id are now in the URL.
 
+/* 7j. In order for the URL /tracking/${orderId}/${productId} to work, we also need to update the Router. In App.jsx, update the Router so the tracking page uses path="tracking/:orderId/:productId"
+  - :orderId and :productId are called URL params (parameters). We can replace them with any text, and this allows us to save an order id and a product id directly in the URL.
+  - To get these values out of the URL, in the Tracking Page, use the hook: import { useParams } from 'react-router'; then at the top of the Tracking Page, run const params = useParams();
+  - Try console.log(params); and open a tracking page. Notice params is an object that contains the orderld and productId from the URL.
+  - Destructure const params into const { orderId, productId } */
+
 function App() {
   const [cart, setCart] = useState([]);
 
@@ -91,7 +97,10 @@ function App() {
       <Route index element={<HomePage cart={cart} setCart={setCart} />} />
       <Route path="checkout" element={<CheckoutPage cart={cart} />} />
       <Route path="orders" element={<OrdersPage cart={cart} />} />
-      <Route path="tracking" element={<TrackingPage cart={cart} />} />
+      <Route
+        path="tracking/:orderId/:productId"
+        element={<TrackingPage cart={cart} />}
+      />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
