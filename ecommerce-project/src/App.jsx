@@ -70,6 +70,8 @@ import "./App.css";
 
 // 7g. In CheckoutPage, separate the header into a component (did this in lesson 6 exercises). Pass in the cart as a prop, display the total quantity.
 
+// 7h. Open the orders page in the browser and click a "Track package" button. The tracking page will not work because there's a <Header /> in the page and it needs the cart. Pass the cart into <Header /> using a prop. Check the page works.
+
 function App() {
   const [cart, setCart] = useState([]);
 
@@ -87,7 +89,7 @@ function App() {
       <Route index element={<HomePage cart={cart} setCart={setCart} />} />
       <Route path="checkout" element={<CheckoutPage cart={cart} />} />
       <Route path="orders" element={<OrdersPage cart={cart} />} />
-      <Route path="tracking" element={<TrackingPage />} />
+      <Route path="tracking" element={<TrackingPage cart={cart} />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
