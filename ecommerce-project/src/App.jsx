@@ -80,6 +80,13 @@ import "./App.css";
   - Try console.log(params); and open a tracking page. Notice params is an object that contains the orderld and productId from the URL.
   - Destructure const params into const { orderId, productId } */
 
+/* 7k. Now, we'll load the data for the Tracking Page from the backend. Using axios, useEffect, and the orderId from the URL:
+  - Make a request to `/api/orders/${orderId}?expand=products` this will load the order from the backend (with product details attached).
+  - Instead of the dependency array [], use [orderId]. This will re-run useEffect if orderId changes (reload the order if orderId changes).
+  - Save the order in useState with initial value of null. Before returning the HTML, check if the order is loaded using if (!order) { return null; }
+  - After the order is loaded, replace the text in the HTML using the values in the order (skip the progress bar for now). Hint: get product details and delivery time using the productId and order.products.find()
+  - Go to the orders page, click "Track package" for some other products /orders, and check that the details are correct. */
+
 function App() {
   const [cart, setCart] = useState([]);
 
