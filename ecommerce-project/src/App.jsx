@@ -72,6 +72,8 @@ import "./App.css";
 
 // 7h. Open the orders page in the browser and click a "Track package" button. The tracking page will not work because there's a <Header /> in the page and it needs the cart. Pass the cart into <Header /> using a prop. Check the page works.
 
+// 7i. Find the "Track package" button in the code. It links to "/tracking". Update this so it links to `/tracking/${orderId}/${productId}` (insert the order and product ids into the string). Click "Track package", and notice the order id and product id are now in the URL.
+
 function App() {
   const [cart, setCart] = useState([]);
 
