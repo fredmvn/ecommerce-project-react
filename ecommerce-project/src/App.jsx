@@ -60,6 +60,10 @@ import "./App.css";
 /* 7c. In OrderSummary.jsx, separate the delivery-date into a component:
   - Create a new component named DeliveryDate. Move the code that finds the selectedDeliveryOption into the component as well.*/
 
+/* 7d. We saw useEffect runs twice due to <StrictMode>. In main.jsx, temporarily remove <StrictMode> and check that useEffect runs once.
+  - Running twice helps us catch bugs. (Running useEffect twice should result in the same HTML being rendered. This is called idempotency).
+  - This only happens in development. In production (the website is on the Internet), <StrictMode> doesn't do anything. Add <StrictMode> back. */
+
 function App() {
   const [cart, setCart] = useState([]);
 
