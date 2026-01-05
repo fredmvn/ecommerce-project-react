@@ -87,6 +87,14 @@ import "./App.css";
   - After the order is loaded, replace the text in the HTML using the values in the order (skip the progress bar for now). Hint: get product details and delivery time using the productId and order.products.find()
   - Go to the orders page, click "Track package" for some other products /orders, and check that the details are correct. */
 
+/* 7l. We'll calculate the progress (how close the product is to delivery).
+  - First: orderProduct.estimatedDeliveryTimeMs - order.orderTimeMs gets the total time required for delivery (totalDeliveryTimeMs).
+  - Then const timePassedMs = dayjs().valueOf() -order.orderTimeMs; calculates the amount of time that has passed since creating the order.
+  - Calculate (timePassedMs / totalDeliveryTimeMs) * 100 this gives us the delivery progress as a percent (50% = halfway, 100% = delivered).
+  - If the progress is > 100%, set it to 100% (limit it to at most 100%).
+  - Scroll down to the <div className="progress-bar"> and give it a prop style={{width: `${deliveryPercent}%` }}. Refresh, and check that the progress bar now reflects the delivery percent.
+  - Temporarily update timePassedMs to totalDeliveryTimeMs * 0.3 and refresh. Check that the progress bar is updated. Change it back after.*/
+
 function App() {
   const [cart, setCart] = useState([]);
 
