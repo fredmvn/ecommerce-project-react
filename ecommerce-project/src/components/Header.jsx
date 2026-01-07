@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NavLink } from "react-router";
 import LogoWhite from "../assets/images/logo-white.png";
 import MobileLogoWhite from "../assets/images/mobile-logo-white.png";
@@ -6,6 +7,15 @@ import CartIcon from "../assets/images/icons/cart-icon.png";
 import "./Header.css";
 
 export function Header({ cart }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+  };
+  const handleSearch = () => {
+    console.log(searchQuery);
+  };
+
   let totalQuantity = 0;
   cart.forEach((cartItem) => (totalQuantity += cartItem.quantity));
   return (
@@ -18,9 +28,15 @@ export function Header({ cart }) {
       </div>
 
       <div className="middle-section">
-        <input className="search-bar" type="text" placeholder="Search" />
+        <input
+          className="search-bar"
+          type="text"
+          placeholder="Search"
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
 
-        <button className="search-button">
+        <button className="search-button" onClick={handleSearch}>
           <img className="search-icon" src={SearchIcon} />
         </button>
       </div>

@@ -135,6 +135,11 @@ import "./App.css";
 
 /* 8h. If the isUpdating state is true and we click the "Update" link, send a request PUT/api/cart-items/:productId and send the backend an object with the property quantity (the value is the quantity saved in the previous exercise - remember to convert it to a number!). await the request, reload the cart, and set the isUpdating state to false. */
 
+/* We'll make the search bar at the top of the home page work.
+8j. Open the home page, and in the Header component, find the search bar <input className="search-bar">
+  - Create a controlled input for the search bar. Add an onclick prop to the search button. When clicked, console.log the search text (for now).
+  - Check the search bar also works on the orders page and tracking page. */
+
 function App() {
   const [cart, setCart] = useState([]);
 
