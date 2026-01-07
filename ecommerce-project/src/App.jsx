@@ -140,6 +140,9 @@ import "./App.css";
   - Create a controlled input for the search bar. Add an onclick prop to the search button. When clicked, console.log the search text (for now).
   - Check the search bar also works on the orders page and tracking page. */
 
+/* 8k. Now when we click the search button, we'll navigate to the home page in order to show the search results. Using the useNavigate hook from react-router, navigate to the URL/?search=${search}
+  - Navigating to / will navigate to the home page. ?search=${search} saves the search text in the URL so we can share it between pages. */
+
 function App() {
   const [cart, setCart] = useState([]);
 

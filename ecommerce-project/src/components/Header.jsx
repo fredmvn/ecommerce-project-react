@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router";
+import { useNavigate } from "react-router";
 import LogoWhite from "../assets/images/logo-white.png";
 import MobileLogoWhite from "../assets/images/mobile-logo-white.png";
 import SearchIcon from "../assets/images/icons/search-icon.png";
@@ -7,13 +8,14 @@ import CartIcon from "../assets/images/icons/cart-icon.png";
 import "./Header.css";
 
 export function Header({ cart }) {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const handleSearchChange = (e) => {
     const value = e.target.value;
     setSearchQuery(value);
   };
   const handleSearch = () => {
-    console.log(searchQuery);
+    navigate(`/?search=${searchQuery}`);
   };
 
   let totalQuantity = 0;
