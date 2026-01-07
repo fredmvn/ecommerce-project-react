@@ -143,6 +143,11 @@ import "./App.css";
 /* 8k. Now when we click the search button, we'll navigate to the home page in order to show the search results. Using the useNavigate hook from react-router, navigate to the URL/?search=${search}
   - Navigating to / will navigate to the home page. ?search=${search} saves the search text in the URL so we can share it between pages. */
 
+/* 8l. In the home page, import { useSearchParams } from 'react-router';
+  - Get the search text using const [searchParams] = useSearchParams(); and const search = searchParams.get('search');
+  - When loading the products, if search exists, use this URL Path instead: /api/products?search=${search} (also add search to the dependency array. Values from outside of useEffect should be in dependency array).
+  - In the Header, also get the search text out of the url. If it exists, set it as the initial value of the search state. Try it out to see if search bar works! */
+
 function App() {
   const [cart, setCart] = useState([]);
 
