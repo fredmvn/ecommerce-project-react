@@ -110,6 +110,8 @@ import "./App.css";
 
 /* 8b. In CheckoutPage.jsx, separate the code that reloads the Payment Summary into another useEffect (this should use the dependency array [cart]). Update the original useEffect to use the dependency array []. Test that everything still works. */
 
+/* 8c. My backend has an api called POST/api/reset. This resets the data to some default values. To use it, add window.axios = axios; in your code (this makes axios available in the Console). Save, and in the Console, try running axios.post('/api/reset'). Refresh the page and check. */
+
 function App() {
   const [cart, setCart] = useState([]);
 
@@ -120,6 +122,7 @@ function App() {
 
   useEffect(() => {
     loadCart();
+    window.axios = axios;
   }, []);
 
   return (

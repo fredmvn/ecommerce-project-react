@@ -16,7 +16,6 @@ export function CheckoutPage({ cart, loadCart }) {
       );
       setDeliveryOptions(response.data);
     };
-
     fetchDeliveryData();
   }, [cart]);
 
