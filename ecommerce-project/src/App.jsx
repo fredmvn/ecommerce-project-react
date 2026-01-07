@@ -108,6 +108,8 @@ import "./App.css";
 
 // 8a. On the orders page, make the "Add to Cart" button for each product work. Use a quantity of 1 and remember to reload the cart after.
 
+/* 8b. In CheckoutPage.jsx, separate the code that reloads the Payment Summary into another useEffect (this should use the dependency array [cart]). Update the original useEffect to use the dependency array []. Test that everything still works. */
+
 function App() {
   const [cart, setCart] = useState([]);
 
