@@ -127,6 +127,12 @@ import "./App.css";
 
 /* 8f. Add a state to track if the quantity is being updated (initial value false). When clicking "Update" switch this state between true and false. If the state is true show the textbox, otherwise show the quantity label. Note: you'll need to move the code into a CartItemDetails component (if you haven't done so) in order for each cart item to have its own state. */
 
+/* 8g. We'll create a controlled input for the quantity textbox.
+  - Create a state for the quantity in the textbox: quantity, setQuantity and set the initial value to cartItem.quantity
+  - Add a prop value={quantity} to the input element.
+  - Add a prop onChange={} to the input element and give it a function.
+  - The function gets a parameter called event. Get the text in the textbox using event.target.value and save it in the state using setQuantity. */
+
 function App() {
   const [cart, setCart] = useState([]);
 
