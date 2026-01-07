@@ -210,7 +210,7 @@
 
 .edit-quantity-input {
   max-width: 0px;
-  border: 0px;
+  border: 0px solid black;
   border-radius: 5px;
   padding: 0px;
   color: transparent;
@@ -221,6 +221,7 @@
   max-width: 50px;
   border: 1px solid black;
   padding: 2px;
-  margin-right: 2px;
+  margin-right: 3px;
   color: initial;
+  transition: all 0.3s ease-in-out;
 }

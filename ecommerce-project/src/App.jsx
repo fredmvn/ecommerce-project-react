@@ -125,6 +125,8 @@ import "./App.css";
   - Before this element, add a textbox: <input type="text" />
   - Add a className to this textbox. Style it with CSS and set width: 50px; */
 
+/* 8f. Add a state to track if the quantity is being updated (initial value false). When clicking "Update" switch this state between true and false. If the state is true show the textbox, otherwise show the quantity label. Note: you'll need to move the code into a CartItemDetails component (if you haven't done so) in order for each cart item to have its own state. */
+
 function App() {
   const [cart, setCart] = useState([]);
 
