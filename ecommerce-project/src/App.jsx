@@ -112,6 +112,14 @@ import "./App.css";
 
 /* 8c. My backend has an api called POST/api/reset. This resets the data to some default values. To use it, add window.axios = axios; in your code (this makes axios available in the Console). Save, and in the Console, try running axios.post('/api/reset'). Refresh the page and check. */
 
+/* 8d. On the home page, after adding a product to the cart, a message should appear saying "✓ Added"
+  - The HTML element for this message already exists.
+  - It's <div className="added-to-cart">
+  - However, this element has the style opacity: 0; (meaning it's completely see-through and invisible).
+  - Create a state, which tracks whether to show this "Added" message (set the initial value to false).
+  - After adding to cart, set this state to true, set the opacity of the element to 1 (not see-through) using the prop: style={{opacity: yourState? 1:0}}
+  - Using setTimeout, after 2 seconds, set the state back to false to make the message disappear. */
+
 function App() {
   const [cart, setCart] = useState([]);
 

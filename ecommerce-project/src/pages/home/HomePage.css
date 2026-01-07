@@ -250,6 +250,12 @@ input:focus {
      be invisible. Use JavaScript to change the
      opacity and make it visible. */
   opacity: 0;
+  transition: opacity 0.3s ease-in-out 0.3s;
+}
+
+.added-to-cart.is-active {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out 0s;
 }
 
 .home-page .added-to-cart img {
