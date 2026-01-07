@@ -18,7 +18,7 @@ export function CartItemDetails({ cartItem, loadCart }) {
         </div>
         <div className="product-quantity">
           <span>
-            Quantity:{" "}
+            Quantity: <input type="text" className="edit-quantity-input" />
             <span className="quantity-label">{cartItem.quantity}</span>
           </span>
           <span className="update-quantity-link link-primary">Update</span>

@@ -120,6 +120,11 @@ import "./App.css";
   - After adding to cart, set this state to true, set the opacity of the element to 1 (not see-through) using the prop: style={{opacity: yourState? 1:0}}
   - Using setTimeout, after 2 seconds, set the state back to false to make the message disappear. */
 
+/* In the checkout page, we'll make the update quantity feature work.
+8e. First, go to the code for each cart item (inside OrderSummary.jsx or CartItemDetails.jsx) and find: <span className="quantity-label">
+  - Before this element, add a textbox: <input type="text" />
+  - Add a className to this textbox. Style it with CSS and set width: 50px; */
+
 function App() {
   const [cart, setCart] = useState([]);
 
