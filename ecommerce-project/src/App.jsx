@@ -106,6 +106,8 @@ import "./App.css";
 
 // 7o. In 6k, we added a 404 page. Pass the cart into the Header in this page.
 
+// 8a. On the orders page, make the "Add to Cart" button for each product work. Use a quantity of 1 and remember to reload the cart after.
+
 function App() {
   const [cart, setCart] = useState([]);
 
@@ -125,7 +127,10 @@ function App() {
         path="checkout"
         element={<CheckoutPage cart={cart} loadCart={loadCart} />}
       />
-      <Route path="orders" element={<OrdersPage cart={cart} />} />
+      <Route
+        path="orders"
+        element={<OrdersPage cart={cart} loadCart={loadCart} />}
+      />
       <Route
         path="tracking/:orderId/:productId"
         element={<TrackingPage cart={cart} />}
