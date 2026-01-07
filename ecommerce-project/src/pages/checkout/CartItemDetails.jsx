@@ -1,10 +1,11 @@
 import axios from "axios";
 import { formatMoney } from "../../utils/money";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export function CartItemDetails({ cartItem, loadCart }) {
   const [isUpdating, setIsUpdating] = useState(false);
   const [quantity, setQuantity] = useState(cartItem.quantity);
+  const inputRef = useRef(null);
 
   const deleteCartItem = async () => {
     await axios.delete(`/api/cart-items/${cartItem.productId}`);
@@ -12,18 +13,34 @@ export function CartItemDetails({ cartItem, loadCart }) {
   };
 
   const updateItemQuantity = async () => {
+    if (!quantity) return;
     await axios.put(`/api/cart-items/${cartItem.product.id}`, {
       quantity,
     });
     await loadCart();
     setIsUpdating(false);
+    blurInput();
+  };
+
+  const blurInput = () => inputRef.current.blur();
+  const focusInput = () => inputRef.current.focus();
+
+  const toggleQuantityInput = () => {
+    const nextValue = !isUpdating;
+    setIsUpdating(nextValue);
+    if (nextValue) focusInput();
+    else blurInput();
   };
 
   const handleUpdateQuantity = () => {
-    if (!isUpdating) setIsUpdating(!isUpdating);
-    else {
-      updateItemQuantity();
-    }
+    if (!isUpdating) toggleQuantityInput();
+    else updateItemQuantity();
+  };
+
+  const handleInputValue = (e) => {
+    const value = e.target.value;
+    // /^\d*$/ is an only numbers regex
+    if (/^\d*$/.test(value)) setQuantity(Number(value));
   };
 
   return (
@@ -39,13 +56,17 @@ export function CartItemDetails({ cartItem, loadCart }) {
           <span>
             Quantity:{" "}
             <input
-              type="number"
+              ref={inputRef}
+              type="text"
               className={`edit-quantity-input ${isUpdating && "is-open"}`}
               value={quantity}
-              min={0}
-              onChange={(event) => {
-                const inputValue = Number(event.target.value);
-                setQuantity(inputValue);
+              inputMode="numeric"
+              pattern="[0-9]*"
+              onChange={handleInputValue}
+              onKeyDown={(event) => {
+                const { key } = event;
+                if (key === "Enter") updateItemQuantity();
+                else if (key === "Escape") toggleQuantityInput();
               }}
             />
             <span className="quantity-label">{quantity}</span>
