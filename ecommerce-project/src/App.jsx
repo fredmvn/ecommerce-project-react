@@ -133,6 +133,8 @@ import "./App.css";
   - Add a prop onChange={} to the input element and give it a function.
   - The function gets a parameter called event. Get the text in the textbox using event.target.value and save it in the state using setQuantity. */
 
+/* 8h. If the isUpdating state is true and we click the "Update" link, send a request PUT/api/cart-items/:productId and send the backend an object with the property quantity (the value is the quantity saved in the previous exercise - remember to convert it to a number!). await the request, reload the cart, and set the isUpdating state to false. */
+
 function App() {
   const [cart, setCart] = useState([]);
 

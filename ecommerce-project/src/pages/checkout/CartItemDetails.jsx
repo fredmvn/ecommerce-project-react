@@ -3,7 +3,7 @@ import { formatMoney } from "../../utils/money";
 import { useState } from "react";
 
 export function CartItemDetails({ cartItem, loadCart }) {
-  const [isUpdating, setisUpdating] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
   const [quantity, setQuantity] = useState(cartItem.quantity);
 
   const deleteCartItem = async () => {
@@ -11,8 +11,19 @@ export function CartItemDetails({ cartItem, loadCart }) {
     await loadCart();
   };
 
-  const toggleEditInput = () => {
-    setisUpdating(!isUpdating);
+  const updateItemQuantity = async () => {
+    await axios.put(`/api/cart-items/${cartItem.product.id}`, {
+      quantity,
+    });
+    await loadCart();
+    setIsUpdating(false);
+  };
+
+  const handleUpdateQuantity = () => {
+    if (!isUpdating) setIsUpdating(!isUpdating);
+    else {
+      updateItemQuantity();
+    }
   };
 
   return (
@@ -41,7 +52,7 @@ export function CartItemDetails({ cartItem, loadCart }) {
           </span>
           <span
             className="update-quantity-link link-primary"
-            onClick={toggleEditInput}
+            onClick={handleUpdateQuantity}
           >
             Update
           </span>
