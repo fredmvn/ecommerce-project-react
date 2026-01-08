@@ -187,6 +187,14 @@ import "./App.css";
   - When checking the dollar amounts, add a test id to each payment summary row. Inside each row, search for the correct dollar amount.
   - Another solution is to use expect (element).toHaveTextContent(...) this checks if an element has a specific text inside (try this solution too). */
 
+/* 9j. Add a test for PaymentSummary that clicks the "Place Order" button.
+  - This runs axios.post, loadCart, and navigate. Mock axios and loadCart, and check that they received the correct values.
+  - We don't need to mock navigate since we're using a <MemoryRouter>. Instead, we can just run navigate and check the URL Path of the page.
+  - Import useLocation from react-router, create a new component called Location, and inside do: const location = useLocation();
+  - Return <div data-testid="url-path">{location.pathname}</div> from this component (location.pathname contains the URL Path).
+  - When rendering, put <Location /> beside the <PaymentSummary>
+  - After clicking Place Order, check <Location /> has the text '/orders' */
+
 function App() {
   const [cart, setCart] = useState([]);
 
