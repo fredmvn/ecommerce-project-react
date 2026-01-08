@@ -169,6 +169,13 @@ import "./App.css";
 
 // 9f. Instead of doing userEvent.setup() in each test, move this code inside beforeEach, and share the user object between all the tests.
 
+/* 9g. Add a test for the HomePage and test if the Add to Cart buttons work.
+  - First, find all the product-containers on the page.
+  - To get the Add to Cart button inside the first product container, use: within(productContainers[0]).getByTestId(...)
+  - Click the first Add to Cart button. Then, get the Add to Cart button in the second product container and click it as well.
+  - After clicking both buttons, the code should have called axios.post twice. Use expect(axios.post).toHaveBeenNthCalledWith(1,...) to check the values that axios.post received for the first call. Then, check the values for the second call (use the same method, but with 2).
+  - Check loadCart was called twice using.toHave BeenCalledTimes(2) */
+
 function App() {
   const [cart, setCart] = useState([]);
 
