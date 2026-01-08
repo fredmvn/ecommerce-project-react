@@ -195,6 +195,8 @@ import "./App.css";
   - When rendering, put <Location /> beside the <PaymentSummary>
   - After clicking Place Order, check <Location /> has the text '/orders' */
 
+/* 9k. Optional: Add tests to the rest of the components (except App.jsx). This is optional / just for practice (see description for sample solutions) */
+
 function App() {
   const [cart, setCart] = useState([]);
 
