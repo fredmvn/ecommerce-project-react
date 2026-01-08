@@ -158,6 +158,12 @@ import "./App.css";
   - Get the quantity selector from the screen (add a test id first) and save it in a variable called quantitySelector
   - expect() has another method called.toHaveValue(value). Use this to check that the quantity selector has the value '1' */
 
+/* 9d. Continuing from the previous exercise, in the quantity selector test, set up another user object using userEvent.setup()
+  - user has another method called user.selectOptions(element, value)
+  - use this to update the quantity selector's value to '3'
+(user.selectOptions is also asynchronous so make sure you await it).
+  - Check the quantity selector now has the value '3' */
+
 function App() {
   const [cart, setCart] = useState([]);
 
