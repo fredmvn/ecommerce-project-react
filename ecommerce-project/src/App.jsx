@@ -154,6 +154,10 @@ import "./App.css";
   - Your test will fail at first. Read the output of vitest to see why it failed.
   - Modify formatMoney so the test passes. */
 
+/* 9c. Add a test for the Product component to test if it can select a quantity.
+  - Get the quantity selector from the screen (add a test id first) and save it in a variable called quantitySelector
+  - expect() has another method called.toHaveValue(value). Use this to check that the quantity selector has the value '1' */
+
 function App() {
   const [cart, setCart] = useState([]);
 
