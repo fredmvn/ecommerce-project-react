@@ -64,15 +64,22 @@ describe("Product component", () => {
     expect(loadCart).toHaveBeenCalled();
   });
 
-  it("has selected the quantity correctly", async () => {
+  it("selects the quantity correctly", async () => {
     render(<Product product={product} loadCart={loadCart} />);
     const quantitySelector = screen.getByTestId("quantity-selector");
-
-    expect(quantitySelector).toHaveValue("1");
-
+    const addToCartButton = screen.getByTestId("add-to-cart-button");
     const user = userEvent.setup();
-    await user.selectOptions(quantitySelector, "3");
 
+    expect(quantitySelector).toHaveValue("1"); // "1" by default
+    await user.selectOptions(quantitySelector, "3"); // selects "3"
     expect(quantitySelector).toHaveValue("3");
+    await user.click(addToCartButton); // clicks add to cart button
+
+    expect(axios.post).toHaveBeenCalledWith("/api/cart-items", {
+      productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+      quantity: 3,
+    }); // it sends a quantity of "3"
+
+    expect(loadCart).toHaveBeenCalled();
   });
 });

@@ -164,6 +164,9 @@ import "./App.css";
 (user.selectOptions is also asynchronous so make sure you await it).
   - Check the quantity selector now has the value '3' */
 
+/* 9e. Continuing from the previous exercise, after updating the value of the quantity selector, click the Add to Cart button.
+  - Check that axios.post was called with the correct values (quantity: 3) and check that loadCart was called. */
+
 function App() {
   const [cart, setCart] = useState([]);
 
