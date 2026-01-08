@@ -148,6 +148,8 @@ import "./App.css";
   - When loading the products, if search exists, use this URL Path instead: /api/products?search=${search} (also add search to the dependency array. Values from outside of useEffect should be in dependency array).
   - In the Header, also get the search text out of the url. If it exists, set it as the initial value of the search state. Try it out to see if search bar works! */
 
+/* 9a. Add a test for formatMoney and check if it works with the number 0 (the result should be '$0.00'). */
+
 function App() {
   const [cart, setCart] = useState([]);
 
