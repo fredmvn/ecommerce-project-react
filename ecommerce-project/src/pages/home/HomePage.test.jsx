@@ -82,17 +82,24 @@ describe("HomePage component", () => {
     const firstAddToCartBtn = firstProduct.getByTestId("add-to-cart-button");
     const secondAddToCartBtn = secondProduct.getByTestId("add-to-cart-button");
 
+    const firstQuantitySelector = firstProduct.getByTestId("quantity-selector");
+    const secondQuantitySelector =
+      secondProduct.getByTestId("quantity-selector");
+
+    user.selectOptions(firstQuantitySelector, "2");
+    user.selectOptions(secondQuantitySelector, "3");
+
     await user.click(firstAddToCartBtn);
     await user.click(secondAddToCartBtn);
 
     expect(axios.post).toHaveBeenNthCalledWith(1, "/api/cart-items", {
       productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-      quantity: 1,
+      quantity: 2,
     });
 
     expect(axios.post).toHaveBeenNthCalledWith(2, "/api/cart-items", {
       productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-      quantity: 1,
+      quantity: 3,
     });
 
     expect(loadCart).toHaveBeenCalledTimes(2);

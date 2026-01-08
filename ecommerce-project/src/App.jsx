@@ -176,6 +176,11 @@ import "./App.css";
   - After clicking both buttons, the code should have called axios.post twice. Use expect(axios.post).toHaveBeenNthCalledWith(1,...) to check the values that axios.post received for the first call. Then, check the values for the second call (use the same method, but with 2).
   - Check loadCart was called twice using.toHave BeenCalledTimes(2) */
 
+/* 9h. Continuing from the previous exercise, before clicking Add to Cart, get the quantity selector for each product and update the quantities.
+  - For the first product, update the quantity to '2'
+  - For the second product, update the quantity to '3'
+  - Check that axios.post received the correct quantity for each product. */
+
 function App() {
   const [cart, setCart] = useState([]);
 
