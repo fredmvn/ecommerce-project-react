@@ -72,51 +72,22 @@ describe("DeliveryOption component", () => {
       />
     );
 
-    const firstOption = screen.getByTestId("delivery-option-1");
-    const secondOption = screen.getByTestId("delivery-option-2");
-    const thirdOption = screen.getByTestId("delivery-option-3");
+    deliveryOptions.forEach((option, i) => {
+      const isFirstOption = i === 0;
+      const optionElem = screen.getByTestId(`delivery-option-${option.id}`);
+      const optionDate = within(optionElem).getByTestId("delivery-option-date");
+      const optionPrice = within(optionElem).getByTestId(
+        "delivery-option-price"
+      );
 
-    expect(firstOption).toBeInTheDocument();
-    expect(secondOption).toBeInTheDocument();
-    expect(thirdOption).toBeInTheDocument();
-
-    const firstOptionDate = within(firstOption).getByTestId(
-      "delivery-option-date"
-    );
-    const secondOptionDate = within(secondOption).getByTestId(
-      "delivery-option-date"
-    );
-    const thirdOptionDate = within(thirdOption).getByTestId(
-      "delivery-option-date"
-    );
-
-    expect(firstOptionDate).toHaveTextContent(
-      dayjs(deliveryOptions[0].estimatedDeliveryTimeMs).format("dddd, MMMM D")
-    );
-    expect(secondOptionDate).toHaveTextContent(
-      dayjs(deliveryOptions[1].estimatedDeliveryTimeMs).format("dddd, MMMM D")
-    );
-    expect(thirdOptionDate).toHaveTextContent(
-      dayjs(deliveryOptions[2].estimatedDeliveryTimeMs).format("dddd, MMMM D")
-    );
-
-    const firstOptionPrice = within(firstOption).getByTestId(
-      "delivery-option-price"
-    );
-    const secondOptionPrice = within(secondOption).getByTestId(
-      "delivery-option-price"
-    );
-    const thirdOptionPrice = within(thirdOption).getByTestId(
-      "delivery-option-price"
-    );
-
-    expect(firstOptionPrice).toHaveTextContent("FREE Shipping");
-    expect(secondOptionPrice).toHaveTextContent(
-      formatMoney(deliveryOptions[1].priceCents)
-    );
-    expect(thirdOptionPrice).toHaveTextContent(
-      formatMoney(deliveryOptions[2].priceCents)
-    );
+      expect(optionElem).toBeInTheDocument();
+      expect(optionDate).toHaveTextContent(
+        dayjs(option.estimatedDeliveryTimeMs).format("dddd, MMMM D")
+      );
+      expect(optionPrice).toHaveTextContent(
+        isFirstOption ? "FREE" : formatMoney(option.priceCents)
+      );
+    });
   });
 
   it("switches between delivery options", async () => {
