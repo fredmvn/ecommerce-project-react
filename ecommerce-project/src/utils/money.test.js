@@ -12,4 +12,8 @@ describe("formatMoney", () => {
   it("works with numbers 0", () => {
     expect(formatMoney("$0.00"));
   });
+  it("works with negative numbers", () => {
+    expect(formatMoney(-999)).toBe("-$9.99");
+    expect(formatMoney(-100)).toBe("-$1.00");
+  });
 });

@@ -150,6 +150,10 @@ import "./App.css";
 
 /* 9a. Add a test for formatMoney and check if it works with the number 0 (the result should be '$0.00'). */
 
+/* 9b. Add a test for formatMoney and check if it works with negative numbers like -999 and -100 (the result should be '-$9.99' and '-$1.00')
+  - Your test will fail at first. Read the output of vitest to see why it failed.
+  - Modify formatMoney so the test passes. */
+
 function App() {
   const [cart, setCart] = useState([]);
 
