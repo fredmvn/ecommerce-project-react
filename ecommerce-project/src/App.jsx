@@ -181,6 +181,12 @@ import "./App.css";
   - For the second product, update the quantity to '3'
   - Check that axios.post received the correct quantity for each product. */
 
+/* 9i. Create an integration test for the PaymentSummary component.
+  - We can get a sample payment summary from the backend (open localhost:3000/api/payment-summary in the browser).
+  - PaymentSummary uses useNavigate so it needs to be inside a router.
+  - When checking the dollar amounts, add a test id to each payment summary row. Inside each row, search for the correct dollar amount.
+  - Another solution is to use expect (element).toHaveTextContent(...) this checks if an element has a specific text inside (try this solution too). */
+
 function App() {
   const [cart, setCart] = useState([]);
 
