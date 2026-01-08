@@ -167,6 +167,8 @@ import "./App.css";
 /* 9e. Continuing from the previous exercise, after updating the value of the quantity selector, click the Add to Cart button.
   - Check that axios.post was called with the correct values (quantity: 3) and check that loadCart was called. */
 
+// 9f. Instead of doing userEvent.setup() in each test, move this code inside beforeEach, and share the user object between all the tests.
+
 function App() {
   const [cart, setCart] = useState([]);
 

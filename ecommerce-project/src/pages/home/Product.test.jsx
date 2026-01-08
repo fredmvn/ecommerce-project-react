@@ -9,6 +9,7 @@ vi.mock("axios");
 describe("Product component", () => {
   let product;
   let loadCart;
+  let user;
 
   beforeEach(() => {
     product = {
@@ -23,6 +24,7 @@ describe("Product component", () => {
       keywords: ["socks", "sports", "apparel"],
     };
     loadCart = vi.fn(); // Creates a fake function that doesn't do anything (Mock)
+    user = userEvent.setup();
   });
 
   it("displays the product details correctly", () => {
@@ -50,8 +52,6 @@ describe("Product component", () => {
   it("adds a product to the cart", async () => {
     render(<Product product={product} loadCart={loadCart} />);
 
-    const user = userEvent.setup();
-
     const addToCartButton = screen.getByTestId("add-to-cart-button");
 
     await user.click(addToCartButton);
@@ -68,7 +68,6 @@ describe("Product component", () => {
     render(<Product product={product} loadCart={loadCart} />);
     const quantitySelector = screen.getByTestId("quantity-selector");
     const addToCartButton = screen.getByTestId("add-to-cart-button");
-    const user = userEvent.setup();
 
     expect(quantitySelector).toHaveValue("1"); // "1" by default
     await user.selectOptions(quantitySelector, "3"); // selects "3"
