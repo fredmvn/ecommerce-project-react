@@ -46,32 +46,48 @@ export function TrackingPage({ cart }) {
 
       <div className="tracking-page">
         <div className="order-tracking">
-          <Link className="back-to-orders-link link-primary" to="/orders">
+          <Link
+            data-testid="back-to-orders-link"
+            className="back-to-orders-link link-primary"
+            to="/orders"
+          >
             View all orders
           </Link>
 
-          <div className="delivery-date">
-            {deliveryPercent >= 100 ? "Delivered on" : "Arriving on"} Monday,
-            June 13{" "}
-            {dayjs(orderProduct.estimatedDeliveryTimeMS).format("dddd, MMMM D")}
+          <div className="delivery-date" data-testid="delivery-date">
+            {deliveryPercent >= 100 ? "Delivered on" : "Arriving on"}{" "}
+            {dayjs(orderProduct.estimatedDeliveryTimeMs).format("dddd, MMMM D")}
           </div>
 
-          <div className="product-info">{orderProduct.product.name}</div>
+          <div className="product-info" data-testid="product-name">
+            {orderProduct.product.name}
+          </div>
 
-          <div className="product-info">Quantity: {orderProduct.quantity}</div>
+          <div className="product-info" data-testid="product-quantity">
+            Quantity: {orderProduct.quantity}
+          </div>
 
-          <img className="product-image" src={orderProduct.product.image} />
+          <img
+            className="product-image"
+            data-testid="product-image"
+            src={orderProduct.product.image}
+          />
 
           <div className="progress-labels-container">
             <div
+              data-testid="label-preparing"
               className={`progress-label ${isPreparing && "current-status"}`}
             >
               Preparing
             </div>
-            <div className={`progress-label ${isShipped && "current-status"}`}>
+            <div
+              data-testid="label-shipped"
+              className={`progress-label ${isShipped && "current-status"}`}
+            >
               Shipped
             </div>
             <div
+              data-testid="label-delivered"
               className={`progress-label ${isDelivered && "current-status"}`}
             >
               Delivered
