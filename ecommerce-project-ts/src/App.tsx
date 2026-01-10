@@ -197,6 +197,12 @@ import "./App.css";
 
 /* 9k. Optional: Add tests to the rest of the components (except App.jsx). This is optional / just for practice (see description for sample solutions) */
 
+declare global {
+  interface Window {
+    axios: typeof axios;
+  }
+}
+
 function App() {
   const [cart, setCart] = useState([]);
 
