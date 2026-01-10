@@ -71,11 +71,11 @@ describe("PaymentSummary component", () => {
 
     await user.click(placeOrderBtn);
 
-    expect(axios.post).toHaveBeenCalledWith("/api/orders"); // calls the api
+    expect(axios.post).toHaveBeenCalledWith("/api/orders"); // Calls the api
 
     await waitFor(() => {
-      expect(loadCart).toHaveBeenCalled(); // loads the cart
-      expect(screen.getByTestId("url-path")).toHaveTextContent("/orders"); // redirects to orders page
+      expect(loadCart).toHaveBeenCalled(); // Loads the cart
+      expect(screen.getByTestId("url-path")).toHaveTextContent("/orders"); // Redirects to orders page
     });
   });
 });

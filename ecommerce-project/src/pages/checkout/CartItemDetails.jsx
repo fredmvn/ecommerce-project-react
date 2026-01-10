@@ -45,14 +45,20 @@ export function CartItemDetails({ cartItem, loadCart }) {
 
   return (
     <>
-      <img className="product-image" src={cartItem.product.image} />
+      <img
+        data-testid="product-image"
+        className="product-image"
+        src={cartItem.product.image}
+      />
 
       <div className="cart-item-details">
-        <div className="product-name">{cartItem.product.name}</div>
-        <div className="product-price">
+        <div data-testid="product-name" className="product-name">
+          {cartItem.product.name}
+        </div>
+        <div data-testid="product-price" className="product-price">
           {formatMoney(cartItem.product.priceCents)}
         </div>
-        <div className="product-quantity">
+        <div data-testid="product-quantity" className="product-quantity">
           <span>
             Quantity:{" "}
             <input
