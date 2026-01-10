@@ -63,10 +63,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem(MESSAGES_STORAGE_KEY, JSON.stringify(chatMessages));
   }, [chatMessages]);
-
+  const title = `${chatMessages.length} Messages`;
   return (
     <div className="app-container">
-      <title>Chatbot Project</title>{" "}
+      <title>{title}</title>{" "}
       <link rel="icon" type="image/svg+xml" href="robot.png" />
       <ChatMessages chatMessages={chatMessages} />
       <ChatInput
