@@ -66,6 +66,8 @@ function App() {
 
   return (
     <div className="app-container">
+      <title>Chatbot Project</title>{" "}
+      <link rel="icon" type="image/svg+xml" href="robot.png" />
       <ChatMessages chatMessages={chatMessages} />
       <ChatInput
         chatMessages={chatMessages}
