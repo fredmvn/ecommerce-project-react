@@ -4,8 +4,8 @@ import axios from "axios";
 import { HomePage } from "./pages/home/HomePage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/orders/OrdersPage";
-import { TrackingPage } from "./pages/TrackingPage";
-import { ErrorPage } from "./pages/ErrorPage";
+import { TrackingPage } from "./pages/tracking/TrackingPage";
+import { ErrorPage } from "./pages/error/ErrorPage";
 import "./App.css";
 
 /* 6a. In the checkout page, split up the header into a separate component called CheckoutHeader.
@@ -225,7 +225,7 @@ function App() {
         path="tracking/:orderId/:productId"
         element={<TrackingPage cart={cart} />}
       />
-      <Route path="*" element={<ErrorPage />} />
+      <Route path="*" element={<ErrorPage cart={cart} />} />
     </Routes>
   );
 }
