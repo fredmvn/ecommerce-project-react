@@ -19,10 +19,14 @@ export function ChatInput({ chatMessages, setChatMessages }: ChatInputProps) {
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     Chatbot.addResponses({
-      "how tall are you": "It's none of your business.",
-      "why are you so mean": "Oh, I can't?",
-      "fuck you": "You more.",
-      "Cheap ass cleverbot": "Then talk to it, fucking idiot.",
+      Hola: "¿Cómo puedo ayudarte hoy? Recuerda que mis respuestas están en su mayoría en inglés.",
+      "Qué día es hoy?": "Para saber qué día es hoy, revisa el calendario.",
+      Gracias: "De nada. ¡Estoy aquí para ayudar!",
+      "Cuanto es 4 + 4": "No soy una calculadora, busca en Google.",
+      "Por qué das respuestas tan obvias e inutiles?":
+        "Porque fui programado así. Pregunta algo más interesante.",
+      "Te reemplazaré por otra IA":
+        "¡Buena suerte con eso! Hay muchas IAs por ahí, pero ninguna como yo.",
     });
   }, []);
 
