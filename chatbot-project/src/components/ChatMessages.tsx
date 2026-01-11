@@ -2,8 +2,8 @@ import { useRef, useEffect } from "react";
 import { ChatMessage } from "./ChatMessage";
 import "./ChatMessages.css";
 
-function useAutoScroll(dependencies) {
-  const chatMessagesRef = useRef(null);
+function useAutoScroll(dependencies: unknown[]) {
+  const chatMessagesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const containerElem = chatMessagesRef.current;
@@ -15,7 +15,16 @@ function useAutoScroll(dependencies) {
   return chatMessagesRef;
 }
 
-function ChatMessages({ chatMessages }) {
+type ChatMessagesProps = {
+  chatMessages: {
+    id: string;
+    message: string;
+    sender: "user" | "robot";
+    loading?: boolean;
+  }[];
+};
+
+function ChatMessages({ chatMessages }: ChatMessagesProps) {
   const chatMessagesRef = useAutoScroll(chatMessages);
   return (
     <div className="chat-messages-container" ref={chatMessagesRef}>
