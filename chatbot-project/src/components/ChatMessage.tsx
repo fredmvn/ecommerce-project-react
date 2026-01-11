@@ -4,7 +4,13 @@ import LoadingMessageGif from "../assets/loading-spinner.gif";
 import dayjs from "dayjs";
 import "./ChatMessage.css";
 
-export function ChatMessage({ sender, message, loading }) {
+type ChatMessageProps = {
+  sender: "user" | "robot";
+  message: string;
+  loading?: boolean;
+};
+
+export function ChatMessage({ sender, message, loading }: ChatMessageProps) {
   const time = dayjs().valueOf();
   const formattedTime = dayjs(time).format("h:mma");
 
